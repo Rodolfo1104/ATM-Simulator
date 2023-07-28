@@ -1,26 +1,32 @@
-def calcular_notas(saque):
+def calcular_notas_para_saque(valor_saque):
     notas_disponiveis = [100, 50, 10, 5, 1]
     notas_fornecidas = {}
 
     for nota in notas_disponiveis:
-        notas_fornecidas[nota] = saque // nota
-        saque %= nota
+        quantidade_notas = valor_saque // nota
+        if quantidade_notas > 0:
+            notas_fornecidas[nota] = quantidade_notas
+            valor_saque -= quantidade_notas * nota
 
     return notas_fornecidas
 
-def caixa_eletronico():
+
+def main():
     valor_minimo = 10
     valor_maximo = 600
 
     while True:
-        saque = int(input("Digite o valor do saque (entre {} e {} reais): ".format(valor_minimo, valor_maximo)))
+        valor_saque = int(input(f"Digite o valor do saque (entre {valor_minimo} e {valor_maximo} reais): "))
 
-        if valor_minimo <= saque <= valor_maximo:
-            notas_fornecidas = calcular_notas(saque)
-            print("\nNotas fornecidas:")
-            for nota, quantidade in notas_fornecidas.items():
-                if quantidade > 0:
-                    print("{} nota(s) de {} reais".format(quantidade, nota))
+        if valor_minimo <= valor_saque <= valor_maximo:
             break
         else:
-            print("Valor inválido. O valor do saque tem que estar entre {} e {} reais.".format(valor_minimo, valor_maximo))
+            print("Valor inválido! O valor do saque deve estar entre 10 e 600 reais.")
+
+    notas_fornecidas = calcular_notas_para_saque(valor_saque)
+
+    print("Notas fornecidas:")
+    for nota, quantidade in notas_fornecidas.items():
+        print(f"{quantidade} nota(s) de {nota} reais")
+
+main()
