@@ -23,4 +23,4 @@ def caixa_eletronico():
                     print("{} nota(s) de {} reais".format(quantidade, nota))
             break
         else:
-            print("Valor inválido. O valor do saque deve estar entre {} e {} reais.".format(valor_minimo, valor_maximo))
+            print("Valor inválido. O valor do saque tem que estar entre {} e {} reais.".format(valor_minimo, valor_maximo))
